@@ -3,25 +3,26 @@ package parser;
 /**
  * Created by SretenskyVD on 21.11.2017.
  */
-import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+
 
 /**
  * Created by SretenskyVD on 25.09.2017.
  */
-public class parser_legins {
+public class parser_top {
 
     public static void main(String[] args) throws IOException {
 
         System.setProperty("javax.net.ssl.trustStore", "s:/Let'sEncryptAuthorityX3_BF.crt.jks");
-        String Path = "https://bfide.ru/catalog/losiny/";
+        String Path = "https://bfide.ru/catalog/topy/";
         int Page =0;
-        for (int count = 1 ; count <=3 ; count++  )
+        for (int count = 1 ; count <=1 ; count++  )
 
         {
 
@@ -46,6 +47,7 @@ public class parser_legins {
             for (Element link1 : links1) {
                 System.out.println();
                 System.out.print(Categorys.text() + " ; " + Names.get(y).attr("data-product") + " ; " + link1.text() + " ; " + prices.get(y).text() );
+              //  System.out.print(Categorys.text() + " ; " + Names.get(y).attr("data-product") + " ; " + link1.text() + " ; "  );
                 String addressUrl = lHref.get(y).attr("abs:href");
 
 

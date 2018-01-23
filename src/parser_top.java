@@ -15,7 +15,8 @@ public class parser_top {
             Document doc1 = Jsoup.connect("https://bfide.ru/catalog/topy/").get();
             Elements lHref = doc1.select("a.d_block");
             Elements links1 = doc1.getElementsByClass("product_name got_bold");
-            Elements prices = doc1.getElementsByClass("current_price got_bold pink");
+          //  Elements prices = doc1.getElementsByClass("current_price got_bold pink");
+             Elements prices = doc1.getElementsByClass("old_price");
              Elements Categorys = doc1.getElementsByClass("title1 got_light mb30");
              Elements Names = doc1.select("a[data-product]");
 
