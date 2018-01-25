@@ -21,10 +21,16 @@ public class ParserKombez { public static void main(String[] args) throws IOExce
     Elements Names = doc1.select("a[data-product]");
 
 
+
     int y = 0;
     for (Element link1 : links1) {
+
+        //System.out.println("!!!!!!!!!!!!!!"+Test);
+
         System.out.println();
-        System.out.print(Categorys.text() +  " ; " + Names.get(y).attr("data-product")+  " ; "  + link1.text() + " ; " + prices.get(y).text());
+        System.out.print(Categorys.text() +  " ; " + Names.get(y).attr("data-product")+  " ; "  + link1.text() + " ; " + prices.get(y).text() );
+        String Test = Names.get(y).attr("data-product");
+        System.out.print( Test);
        // System.out.print(Categorys.text() +  " ; " + Names.get(y).attr("data-product")+  " ; "  + link1.text() + " ; ");
         String addressUrl = lHref.get(y).attr("abs:href");
 
