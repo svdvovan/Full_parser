@@ -52,7 +52,9 @@ public class ParserKombez { public static void main(String[] args) throws IOExce
         String addressUrl = lHref.get(y).attr("abs:href");
 
 
+        try{
         Document doc2 = Jsoup.connect(addressUrl).get();
+
 
         Elements razmeres = doc2.getElementsByClass("skuLabel prop_RAZMER_");
         int numRazmeras = 5;
@@ -91,6 +93,50 @@ public class ParserKombez { public static void main(String[] args) throws IOExce
         for (Element picture : pictures) {
             System.out.print(" ; https://bfide.ru" + pictures.get(z).attr("src"));
             z++;
+        }
+        }
+        catch (java.util.zip.ZipException e){
+            Document doc2 = Jsoup.connect(addressUrl).get();
+
+
+            Elements razmeres = doc2.getElementsByClass("skuLabel prop_RAZMER_");
+            int numRazmeras = 5;
+            String[] allRazmeras = new String[numRazmeras];
+            allRazmeras[0] = "XXS";
+            allRazmeras[1] = "XS";
+            allRazmeras[2] = "S";
+            allRazmeras[3] = "M";
+            allRazmeras[4] = "L";
+            int allRazmerasIndex = 0;
+
+            for (Element razmer : razmeres) {
+                while (allRazmerasIndex < numRazmeras && !allRazmeras[allRazmerasIndex].equals(razmer.text())) {
+                    System.out.print("; " + allRazmeras[allRazmerasIndex] + " ; 0");
+                    ++allRazmerasIndex;
+                }
+                if (allRazmerasIndex < numRazmeras) {
+                    ++allRazmerasIndex;
+                }
+                // System.out.print( " ; " + razmer.text());
+                System.out.print(" ; " + razmer.text() + " ; " + "10");
+            }
+            while (allRazmerasIndex < numRazmeras) {
+                System.out.print("; " + allRazmeras[allRazmerasIndex] + " ; 0");
+                ++allRazmerasIndex;
+            }
+
+//        for (Element razmer : razmeres) {
+//
+//            System.out.print(" ; " + razmer.text());
+//        }
+
+            Elements pictures = doc2.getElementsByClass("zoomer image");
+
+            int z = 0;
+            for (Element picture : pictures) {
+                System.out.print(" ; https://bfide.ru" + pictures.get(z).attr("src"));
+                z++;
+            }
         }
         y++;
 
