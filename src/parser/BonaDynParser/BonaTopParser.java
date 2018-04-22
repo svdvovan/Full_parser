@@ -7,21 +7,18 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-/**
- * Created by SretenskyVD on 20.04.2018.
- */
-public class BonaLegParser {
+public class BonaTopParser {
     public static void main(String[] args) throws IOException {
 
         System.setProperty("javax.net.ssl.trustStore", "d:/git/Bona.crt.jks");
-        String Path = "https://bfide.ru/catalog/losiny/?SECTION_CODE=losiny&PAGEN_1=";
+        String Path = "https://bfide.ru/catalog/topy/?SECTION_CODE=topy&PAGEN_1=";
         int Page = 1;
-        for (int count = 1; count <= 20; count++)
+        for (int count = 1; count <= 25; count++)
 
         {
 
-           String Path1 = Path + Page;
- //           System.out.println(Path1);
+            String Path1 = Path + Page;
+            //           System.out.println(Path1);
 
             Document doc1 = Jsoup.connect(Path1).get();
             Elements lHref = doc1.getElementsByClass("product__link");
@@ -36,13 +33,13 @@ public class BonaLegParser {
             for (Element link1 : links1) {
 
                 String Reshalo = Nalichie.get(y).text();
-                   String idNumber = id_product.get(y).attr("data-id");
+                String idNumber = id_product.get(y).attr("data-id");
 
- //               if (!Reshalo.equals("Закончились")) {
-             if (Reshalo.equals("В наличии")) {
+                //               if (!Reshalo.equals("Закончились")) {
+                if (Reshalo.equals("В наличии")) {
                     System.out.println();
-  //                  System.out.print(Nalichie.get(y).text() + " ; " + Categorys.text() + " ; " + idNumber + " ; " + NameOfProduct.get(y).text() + " ; " + prices.get(y).text() + " ; " );
-                 System.out.print( Categorys.text() + ";" +"bf-" +  idNumber + ";" + NameOfProduct.get(y).text() + ";" + prices.get(y).text()  + "; полиамид 80%, лайкра 20% ;" );
+                    //                  System.out.print(Nalichie.get(y).text() + " ; " + Categorys.text() + " ; " + idNumber + " ; " + NameOfProduct.get(y).text() + " ; " + prices.get(y).text() + " ; " );
+                    System.out.print( Categorys.text() + ";" +"bf-" +  idNumber + ";" + NameOfProduct.get(y).text() + ";" + prices.get(y).text()  + "; полиамид 80%, лайкра 20% ;" );
                     String addressUrl = lHref.get(y).attr("abs:href");
 
                     Document doc2 = Jsoup.connect(addressUrl).get();
@@ -68,9 +65,9 @@ public class BonaLegParser {
                         System.out.print("; https://bfide.ru" + pictures.get(z).attr("src"));
                         z++;
                     }
-               } //здесь Reshalo отключать
-                    y++;
-                }
+                } //здесь Reshalo отключать
+                y++;
+            }
 
 
             Page++;
@@ -79,5 +76,4 @@ public class BonaLegParser {
 
 
     }
-
 }
